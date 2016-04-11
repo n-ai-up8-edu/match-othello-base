@@ -271,11 +271,21 @@ class othellotp_game {
   }
   bool play_move(string move) {
     if(move == "PASS") { 
+      for(int i = 1; i < 9; i++) {
+	for(int j = 1; j < 9; j++) {
+	  if(board[i*10+j] == '.') {
+	    cap_start = -1; cap_size = 0;
+	    if(make_cap(i*10+j) == true) {
+	      return false;
+	    }
+	  }
+	}
+      }
       cap_player_color = '@';
       cap_opponent_color = 'o';
       if(nb_turn%2 == 1) {
-	cap_player_color = 'o';
-	cap_opponent_color = '@';
+        cap_player_color = 'o';
+        cap_opponent_color = '@';
       }
       nb_turn ++; return true; 
     }
